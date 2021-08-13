@@ -22,14 +22,5 @@ module.exports = {
       code: 100,
       ignoreUrls: true
     }]
-  },
-  settings: {
-    'import/resolver': {
-      alias: {
-        map: [
-          ['@', './src']
-        ]
-      }
-    }
   }
 };

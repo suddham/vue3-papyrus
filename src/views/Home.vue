@@ -1,6 +1,7 @@
 <template>
   <div class="home">
 <!--    <login/>-->
+    <h1 class="">Home</h1>
   </div>
 </template>
 

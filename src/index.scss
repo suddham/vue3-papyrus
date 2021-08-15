@@ -1,16 +1,5 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-.button {
-  cursor: pointer;
-  box-shadow: 3px 3px 0 #002f3c;
-  white-space: nowrap;
-  transition-property: background-color,border-color,color,fill,stroke,opacity,box-shadow,transform;
-  transition: all .05s ease-in;
-
-  &:hover{
-    box-shadow: 1px 1px 0 #002f3c;
-    transform: translate(2px,2px);
-  }
-}
+@tailwind variants;
+@import "assets/styles/_globals.scss";

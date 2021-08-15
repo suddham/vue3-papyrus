@@ -1,15 +1,21 @@
 <template>
   <Navigation />
 
-  <div class="w-full max-w-screen-xl mx-auto pt-12 lg:flex relative">
-<!--    side nav -->
+  <div class="w-full max-w-screen-xl mx-auto pt-12 lg:grid lg:grid-flow-col relative">
+    <!--    side nav -->
+    <div>
 
-<!--    main content-->
+    </div>
+    <!--    main content-->
     <div class="bg-white">
       <router-view/>
     </div>
 
-<!--    right side -->
+    <!--    right side -->
+    <div>
+
+    </div>
+
   </div>
 </template>
 
@@ -22,16 +28,4 @@ export default {
 </script>
 
 <style lang="scss">
-@import url('http://fonts.cdnfonts.com/css/code-saver');
-
-$primary: #faf77d;
-$text-color: #002f3c;
-$app-bg-light: #fffef8;
-$app-bg-dark: $text-color;
-
-*, html, body {
-  font-family: 'Code Saver', sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <Disclosure as="nav" class="bg-gray-800" v-slot="{ open }" id="nav">
+  <Disclosure as="nav" class="bg-white dark:bg-gray-800" v-slot="{ open }" id="nav">
     <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
       <div class="relative flex items-center justify-between h-16">
         <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
@@ -13,13 +13,13 @@
 
         <div class="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
           <div class="flex-shrink-0 flex items-center">
-            <img class="block lg:hidden h-8 w-auto" :src="Logo" alt="Papyrus" />
-            <img class="block lg:block h-9 w-auto" :src="LogoFull" alt="Papyrus" />
+<!--            <img class="block lg:hidden h-8 w-auto" :src="Logo" alt="Papyrus" />-->
+            <img class="dark:hidden h-6 md:h-9 w-auto" :src="LogoFull" alt="Papyrus" />
           </div>
           <div class="hidden sm:block sm:ml-12">
             <div class="flex space-x-4">
               <a v-for="item in navigation" :key="item.name" :href="item.href"
-                 :class="[item.current ? 'bg-primary' : 'text-gray-300 hover:bg-secondary hover:text-white',
+                 :class="[item.current ? 'bg-primary' : 'text-gray-800 dark:text-gray-300 hover:bg-secondary hover:text-white',
                  'px-3 py-2 rounded-md text-sm font-medium']"
                  :aria-current="item.current ? 'page' : undefined"
               >
@@ -29,8 +29,7 @@
           </div>
         </div>
 
-        <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-
+        <div class="absolute inset-y-0 right-0 flex items-center pr-2 md::flex md:flex-1 md:justify-end">
           <template v-if="userIsLoggedIn">
             <!-- Notification component -->
             <button class="bg-gray-800 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
@@ -57,23 +56,27 @@
                   <MenuItem v-slot="{ active }">
                     <a href="#" :class="[active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700']">Sign out</a>
                   </MenuItem>
+
+                  <MenuItem v-slot="{ active }" class="inline-block">
+                    <a href="#" :class="[active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700']">Change Theme</a>
+                    <theme-switcher />
+                  </MenuItem>
                 </MenuItems>
               </transition>
             </Menu>
           </template>
 
           <template v-else>
-            <div class="hidden lg:flex xl:w-1/4 px-4 xl:px-6 ">
-              <router-link class=" h-7 px-6 border-2 rounded text-sm md:text-base font-bold bg-primary button whitespace-no-wrap transition-all" to="login">Login</router-link>
+            <div class="flex xl:w-1/4 px-4 xl:px-6">
+              <button-base
+                :route="'/login'"
+              >
+                Login
+              </button-base>
             </div>
+            <theme-switcher class="hidden sm:block"/>
           </template>
 
-          <button class="bg-gray-700 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
-            <span class="sr-only">Switch to light or dark theme</span>
-            <SunIcon class="h-6 w-6" aria-hidden="true" />
-
-            <MoonIcon class="h-6 w-6" aria-hidden="true" />
-          </button>
         </div>
       </div>
     </div>
@@ -103,15 +106,15 @@
 import {
     Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItem, MenuItems
 } from '@headlessui/vue';
-import {
-    BellIcon, SunIcon, MoonIcon, MenuIcon, XIcon
-} from '@heroicons/vue/outline';
+import { BellIcon, MenuIcon, XIcon } from '@heroicons/vue/outline';
 
 import LogoFull from '@/assets/logos/logo-full-1.svg';
 import Logo from '@/assets/logos/logo.svg';
+import ButtonBase from '../ui/ButtonBase';
+import ThemeSwitcher from '../ui/buttons/ThemeSwitcher';
 
 const navigation = [
-    { name: 'Dashboard', href: '#', current: true },
+    { name: 'Home', href: '#', current: true },
     { name: 'Team', href: '#', current: false },
     { name: 'Projects', href: '#', current: false },
     { name: 'Calendar', href: '#', current: false }
@@ -119,6 +122,8 @@ const navigation = [
 
 export default {
     components: {
+        ThemeSwitcher,
+        ButtonBase,
         Disclosure,
         DisclosureButton,
         DisclosurePanel,
@@ -128,9 +133,7 @@ export default {
         MenuItems,
         BellIcon,
         MenuIcon,
-        XIcon,
-        SunIcon,
-        MoonIcon
+        XIcon
     },
     data() {
         return {
